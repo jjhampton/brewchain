@@ -50,6 +50,15 @@ const BrewNode = function(port) {
         });
     };
 
+    const processedRecievedChain = blocks => {
+        let newChain = blocks.sort((block1, block2) => block1.index - block2.index);
+
+        if (newChain.length > chain.getTotalBlocks() && chain.checkNewChainIsValid(newChain)) {
+            chain.replaceChain(newChain);
+            console.log('chain replaced');
+        }
+    }
+
     const processedRecievedBlock = block => {
         let currentTopBlock = chain.getLatestBlock();
 
