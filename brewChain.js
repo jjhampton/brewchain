@@ -8,9 +8,10 @@ const BrewChain = function() {
     function init() {
         genesisBlock = {
             index: 0,
-            timestamp: new Date().getTime(),
+            timestamp: 1511818270000,
             data: 'Our genesis data',
-            previousHash: '-1'
+            previousHash: '-1',
+            nonce: 0
         }
 
         genesisBlock.hash = createHash(genesisBlock);
@@ -37,10 +38,11 @@ const BrewChain = function() {
             timestamp: new Date().getTime(),
             data: data,
             index: currentBlock.index + 1,
-            previousHash: currentBlock.hash
+            previousHash: currentBlock.hash,
+            nonce: 0
         };
 
-        newBlock.hash = createHash(newBlock);
+        newBlock = proofOfWork(newBlock);
 
         return newBlock;
     }
