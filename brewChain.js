@@ -36,8 +36,8 @@ const BrewChain = function() {
         let newBlock = {
             timestamp: new Date().getTime(),
             data: data,
-            index: lastBlock.index + 1,
-            previousHash: lastBlock.hash
+            index: currentBlock.index + 1,
+            previousHash: currentBlock.hash
         };
 
         newBlock.hash = createHash(newBlock);
@@ -80,7 +80,7 @@ const BrewChain = function() {
             // previous hash is incorrect
             return false;
         }
-        else if (!hash.isValid(block)) {
+        else if (!hashIsValid(block)) {
             // hash is incorrect
             return false;
         }
